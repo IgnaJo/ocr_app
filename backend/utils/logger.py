@@ -1,10 +1,10 @@
 import os 
 import json
 from datetime import datetime
-from config import LOGS_DIR
+from config import LOG_DIR
 
-TEXT_LOG_FILE = os.path.join(LOGS_DIR, 'process_log.txt')
-JSON_LOG_FILE = os.path.join(LOGS_DIR, 'proscess_log.jsonl')
+TEXT_LOG_FILE = os.path.join(LOG_DIR, 'process_log.txt')
+JSON_LOG_FILE = os.path.join(LOG_DIR, 'proscess_log.jsonl')
 
 
 def log_event(filename, folio, status, message=""):

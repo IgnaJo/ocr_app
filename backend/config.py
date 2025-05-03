@@ -1,4 +1,10 @@
+from dotenv import load_dotenv
 import os
+
+load_dotenv()
+
+SUPABASE_URL = os.getenv('SUPABASE_URL' )
+SUPABASE_KEY = os.getenv('SUPABASE_KEY' )
 
 
 # Directorios de archivos pdf
@@ -22,7 +28,7 @@ TESSERACT_CONFIG = '--oem 3 --psm 6'
 TESSERACT_LANG = 'spa+eng'
 
 # SUPABASE CONFIG
-SUPABASE_URL = os.getenv('SUPABASE_URL', ' ')
-SUPABASE_KEY = os.getenv('SUPABASE_KEY', ' ')
+SUPABASE_URL = os.getenv('SUPABASE_URL')
+SUPABASE_KEY = os.getenv('SUPABASE_KEY')
 SUPABASE_LOG_TABLE = 'logs'
 

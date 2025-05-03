@@ -8,7 +8,9 @@ from services.preprocessing import preprocess_image
 from services.ocr_reader import extract_text_from_image
 from services.folio_extractor import extract_folio_from_text
 from utils.logger import log_event
-from utils.logger import setup_logger
+from utils.setup_logger import setup_logger
+from utils.log_writer import write_json_log
+from services.supabase_utils.supabase_logger import log_to_supabase
 
 logger = setup_logger()
 
@@ -39,15 +41,19 @@ def main():
                 new_filename = f"{folio}.pdf"
                 os.rename(os.path.join(INPUT_DIR, filename), os.path.join(OUTPUT_DIR, new_filename))
                 log_event(new_filename, folio, "success")
+                write_json_log("renames", filename, folio, "Sucess")
+                log_to_supabase(new_filename, folio, "success")
                 print(f"Archivo renombrado a: {new_filename}")
             else:
                 print(f"Folio fuera de rango: {folio_num}")
                 os.rename(os.path.join(INPUT_DIR, filename), os.path.join(ERROR_DIR, filename))
                 log_event(filename, folio, "error", "Folio fuera de rango")
+                write_json_log("fuera_rango", filename, folio, "Folio fuera de rango")
 
         else:
             print(f"Folio no válido o no detectado: {folio}")
             os.rename(os.path.join(INPUT_DIR, filename), os.path.join(ERROR_DIR, filename))
             log_event(filename, folio, "error", "No se detectó folio")
+            write_json_log("no_detectado", filename, folio, "No se detectó folio")
 if __name__ == "__main__":
     main()
