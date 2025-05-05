@@ -1,11 +1,7 @@
 import os
 from config import INPUT_DIR, OUTPUT_DIR, ERROR_DIR, LOG_DIR
 
-def ensure_directories_exist():
+def ensure_directories_exist(input_dir: str, output_dir: str):
     
-    for folder in [INPUT_DIR, OUTPUT_DIR, ERROR_DIR, LOG_DIR]:
-        if not os.path.exists(folder):
-            os.makedirs(folder)
-            print(f"Directorio creado: {folder}")
-        else:
-            print(f"Directorio ya existe: {folder}")
+    os.makedirs(input_dir, exist_ok=True)
+    os.makedirs(output_dir, exist_ok=True)
